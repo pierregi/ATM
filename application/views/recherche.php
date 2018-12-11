@@ -1,4 +1,4 @@
-<div>
+<div class="recherche">
 <?php 
     echo form_open('artiste/recherche');
 ?>
