@@ -12,5 +12,7 @@ class Artiste extends CI_Controller{
         $this->load->view('template');
     }
     
-    
+    public function recherche(){
+        $this->load->view('recherche');
+    }   
 }
