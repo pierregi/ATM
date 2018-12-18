@@ -21,6 +21,12 @@ class Artiste extends CI_Controller{
         $this->load->helper('url');
         $this->load->helper('form');
         
+        $data['nom'] = $this->label('nom');
+        $data['email'] = $this->label('email');
+        $data['password'] = $this->label('password');
+        $data['password2'] = $this->label('password2');      
+        $data['annee'] = $this->label('annee');  
+        
         $data['subView'] = "inscription";
         $this->load->vars($data);   
         $this->load->view('template');
@@ -29,13 +35,100 @@ class Artiste extends CI_Controller{
     
     public function inscription(){
         
+<<<<<<< HEAD
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('html');
+=======
+        $this->load->model('ArtisteModel');
+        $this->form_validation->set_rules(
+            'nom', 'Le nom',
+            array(
+                'required',
+                'is_unique[groupe.nom]',
+                'max_length[50]',
+                array(
+                    'xss_callable',
+                    array($this->ArtisteModel,'xss_test')
+                )
+            ),
+            array(
+                'is_unique'     => 'Ce nom de groupe existe déjà.',
+            )
+        );
+        $this->form_validation->set_rules(
+            'email','l\'e-mail',
+            array(
+                'required',
+                'valid_email',
+                'max_length[50]',
+                array(
+                    'xss_callable',
+                    array($this->ArtisteModel,'xss_test')
+                )
+            ),
+            array(
+                'valid_email'       => 'Il faut rentrer un email valide .'
+            )
+        );
+        $this->form_validation->set_rules(
+            'annee', 'L\'année',
+            array(
+                'required',
+                'exact_length[4]',
+                'integer'
+            ),
+            array(
+                'is_unique'     => 'Ce nom de groupe existe déjà.',
+                'exact_length'  => '{field} doit contenir {param} chiffres.',
+                'integer'       => '{field} doit être un entier.' 
+            )
+        );
+        $this->form_validation->set_rules(
+            'password','Le password',
+            array(
+                'required',
+                'matches[passConf]',
+                'min_length[4]',
+                'max_length[50]'
+            ),
+            array(
+                'matches'       => 'Les mots de passes ne matchent pas.'
+            )
+        );
+        $this->form_validation->set_rules(
+            'password2','La confirmation du password',
+            array(
+                'required',
+                'min_length[4]',
+                'max_length[50]'
+                )                
+        );
+        $this->form_validation->set_message(
+            array(
+                'required'      =>  '%s est obligatoire',
+                'min_length'    =>  'field} doit contenir {param} caractère minimum',
+                'max_length'    =>  '{field} ne peut contenir plus de {param} caractères',
+                'xss_callable' => "Balise script interdite"
+            )
+        );
         
-        if ($this->form_validation->run() == FALSE)
+        // Récupération des variables POST
+>>>>>>> e63d5e0239985e16a21d93792f1b38ac180a4dc6
+        
+        
+        
+
+        if ($this->form_validation->run() === FALSE)
         {
-                
+            $data['nom'] = $this->label('nom');
+            $data['email'] = $this->label('email');
+            $data['password'] = $this->label('password');
+            $data['password2'] = $this->label('password2');
+            $data['annee'] = $this->label('annee');  
+            $data['subView'] = "inscription";
+            $this->load->view('template',$data);
+        }else{
                 $nom = $this->input->post('nom');
                 $email = $this->input->post('email');
                 $password = $this->input->post('password');
@@ -44,10 +137,6 @@ class Artiste extends CI_Controller{
             
                 $data['subView'] = "inscriptionSuccess";
                 $this->load->view('template',$data);
-                
-            
-        }else{
-                
         }
         
         
@@ -66,4 +155,12 @@ class Artiste extends CI_Controller{
         $data['salle'] = $this->ArtisteModel->salleDisponible($date);
         $this->load->view('template',$data);
     }   
+    
+    public function label($id){
+        $res="";
+        if(null!=form_error($id)){
+            $res = form_error($id, 'placeholder="', '"');
+        }
+        return $res;
+    }
 }
