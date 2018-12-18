@@ -83,7 +83,7 @@ class Artiste extends CI_Controller{
             'password','Le password',
             array(
                 'required',
-                'matches[passConf]',
+                'matches[password2]',
                 'min_length[4]',
                 'max_length[50]'
             ),
