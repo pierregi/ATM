@@ -30,6 +30,7 @@ class Artiste extends CI_Controller{
     public function inscription(){
         
         $this->load->library('form_validation');
+        $this->load->helper('url');
         
         if ($this->form_validation->run() == FALSE)
         {
@@ -40,7 +41,9 @@ class Artiste extends CI_Controller{
                 $annee = $this->input->post('annee');
                 $this->ArtisteModel->ajouterGroupe($nom,$email,$password,$annee);
             
-                $this->load->view('inscriptionSuccess');
+                $data['subView'] = "inscriptionSuccess";
+                $this->load->view('template',$data);
+            
             
         }else{
                 
