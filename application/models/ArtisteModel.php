@@ -31,9 +31,40 @@ class ArtisteModel extends CI_Model{
         $this->db->insert('groupe',$data);
         
     }
+<<<<<<< HEAD
+    
+    public function salleDisponible($date){
+        // select * from salle where salle not in (select distinct  salle from concert where date = '2017-12-09') ORDER BY ville asc
+        
+        // Premiere requete : select distinct salle from concert where date = '2017-12-09'
+        $this->db->select('salle');
+        $this->db->where('date', $date);
+        $this->db->distinct();
+        $sallesPrisent = $this->arr_concat($this->db->get('concert')->result_array());
+        
+        $this->db->select('*');
+        if(count($sallesPrisent)>0){
+            $this->db->where_not_in('salle',$sallesPrisent);
+        }
+        $this->db->order_by('ville', 'ASC');
+        return $this->db->get('salle')->result_array();
+        
+    }
+    
+    public function arr_concat($arr){
+        
+        $tmp = array();
+        foreach($arr as $value){
+            $tmp[] = $value["salle"];
+        }
+        return $tmp;
+    }
+    
+=======
      public function xss_test($string){
         return $this->security->xss_clean($string, TRUE)!==FALSE;
     }
+>>>>>>> e63d5e0239985e16a21d93792f1b38ac180a4dc6
     
     
     

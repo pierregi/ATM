@@ -35,6 +35,11 @@ class Artiste extends CI_Controller{
     
     public function inscription(){
         
+<<<<<<< HEAD
+        $this->load->library('form_validation');
+        $this->load->helper('url');
+        $this->load->helper('html');
+=======
         $this->load->model('ArtisteModel');
         $this->form_validation->set_rules(
             'nom', 'Le nom',
@@ -109,6 +114,7 @@ class Artiste extends CI_Controller{
         );
         
         // Récupération des variables POST
+>>>>>>> e63d5e0239985e16a21d93792f1b38ac180a4dc6
         
         
         
@@ -137,7 +143,16 @@ class Artiste extends CI_Controller{
     }
     
     public function recherche(){
+        
+        $date = $this->input->post('date');
+        
         $data['subView']='recherche';
+        if(empty($date)){
+            $data['empty'] = 1;
+        }else{
+            $data['empty'] = 0;
+        }
+        $data['salle'] = $this->ArtisteModel->salleDisponible($date);
         $this->load->view('template',$data);
     }   
     

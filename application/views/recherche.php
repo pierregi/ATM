@@ -1,15 +1,46 @@
-<div class="recherche">
-<?php 
-    echo form_open('artiste/recherche');
-?>
-    <input id="date" type="date" placeholder="Date">
-    <input class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect " value="Rechercher" type="submit"/>
-    <a id="option">plus d'option</a>
-    
-    <input class="mdl-textfield__input" type="text" id="ville" name="ville" placeholder="Ville"/>
-    
-    
-<?php
-    echo form_close();
-?>
+
+
+
+<?php echo form_open('artiste/recherche',array('class'=>'form-inline')); ?>
+
+    <div class="form-group">
+        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
+        <input type="submit" value="Rechercher" class="btn btn-primary">
     </div>
+
+<?php echo form_close(); ?>
+
+
+
+<br>
+
+<?php if(!$empty): ?>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Ville</th>
+      <th scope="col">Salle</th>
+    </tr>
+  </thead>
+  <tbody>
+      
+  
+  <?php foreach($salle as $date): ?>
+        <tr>
+            <th><?php echo $date["ville"]?></th>
+            <th><?php echo $date["salle"]?></th>
+        </tr>
+  <?php endforeach; ?>
+      
+  
+  </tbody>
+</table>
+
+
+<?php endif; ?>
+
+
+
+
