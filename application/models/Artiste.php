@@ -1,7 +1,7 @@
 <?php
 
 
-class Artiste extends CI_Model{
+class Model_artiste extends CI_Model{
     
     public function __construct(){
         parent::__construct();
@@ -14,5 +14,7 @@ class Artiste extends CI_Model{
     
     
     
-    
+    public function xss_test($string){
+        return $this->security->xss_clean($string, TRUE)!==FALSE;
+    }
 }
