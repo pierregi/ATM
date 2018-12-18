@@ -5,6 +5,7 @@
 
     <div class="form-group">
         <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
+        <input type="text" id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
         <input type="submit" value="Rechercher" class="btn btn-primary">
     </div>
 

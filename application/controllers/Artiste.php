@@ -140,14 +140,20 @@ class Artiste extends CI_Controller{
     public function recherche(){
         
         $date = $this->input->post('date');
-        
+        $ville = $this->input->post('ville');
         $data['subView']='recherche';
         if(empty($date)){
             $data['empty'] = 1;
         }else{
             $data['empty'] = 0;
         }
-        $data['salle'] = $this->ArtisteModel->salleDisponible($date);
+        if(empty($ville)){
+            $data['salle'] = $this->ArtisteModel->salleDisponible($date);
+        }else{
+            $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
+        }
+        
+        
         $this->load->view('template',$data);
     }   
     
