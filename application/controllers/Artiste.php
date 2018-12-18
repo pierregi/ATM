@@ -52,5 +52,8 @@ class Artiste extends CI_Controller{
         
     }
     
-    
+    public function recherche(){
+        $data['subView']='recherche';
+        $this->load->view('template',$data);
+    }   
 }
