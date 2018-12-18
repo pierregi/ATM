@@ -56,7 +56,7 @@ class Artiste extends CI_Controller{
             array(
                 'required',
                 'valid_email',
-                'is_unique[contact.contact]',
+                'is_unique[users.email]',
                 'max_length[120]',
                 array(
                     'xss_callable',
