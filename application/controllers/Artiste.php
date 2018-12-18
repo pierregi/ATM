@@ -41,7 +41,7 @@ class Artiste extends CI_Controller{
             array(
                 'required',
                 'is_unique[groupe.nom]',
-                'max_length[50]',
+                'max_length[60]',
                 array(
                     'xss_callable',
                     array($this->ArtisteModel,'xss_test')
@@ -56,14 +56,15 @@ class Artiste extends CI_Controller{
             array(
                 'required',
                 'valid_email',
-                'max_length[50]',
+                'is_unique[contact.contact]',
+                'max_length[120]',
                 array(
                     'xss_callable',
                     array($this->ArtisteModel,'xss_test')
                 )
             ),
             array(
-                'valid_email'       => 'Il faut rentrer un email valide .'
+                'valid_email'       => 'Il faut rentrer un email valide.'
             )
         );
         $this->form_validation->set_rules(
@@ -88,7 +89,7 @@ class Artiste extends CI_Controller{
                 'max_length[50]'
             ),
             array(
-                'matches'       => 'Les mots de passes ne matchent pas.'
+                'matches'       => 'Les mots de passes ne correspondent pas.'
             )
         );
         $this->form_validation->set_rules(
