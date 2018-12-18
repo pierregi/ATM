@@ -43,7 +43,7 @@ class Artiste extends CI_Controller{
             
                 $data['subView'] = "inscriptionSuccess";
                 $this->load->view('template',$data);
-            
+                
             
         }else{
                 
