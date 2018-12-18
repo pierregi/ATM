@@ -6,6 +6,7 @@ class Artiste extends CI_Controller{
     
     public function __construct(){
         parent::__construct();
+        $this->load->model('ArtisteModel');
     }
     
     public function home(){
@@ -30,22 +31,19 @@ class Artiste extends CI_Controller{
         
         $this->load->library('form_validation');
         
-        // Récupération des variables POST
-        
-        $nom = $this->input->post('nom');
-        
-        $email = $this->input->post('email');
-        
-        $password = $this->input->post('password');
-        
-        $passwordVerif = $this->input->post('passwordVerif');
-        
-
         if ($this->form_validation->run() == FALSE)
         {
+                
+                $nom = $this->input->post('nom');
+                $email = $this->input->post('email');
+                $password = $this->input->post('password');
+                $annee = $this->input->post('annee');
+                $this->ArtisteModel->ajouterGroupe($nom,$email,$password,$annee);
+            
                 $this->load->view('inscriptionSuccess');
+            
         }else{
-                // Error
+                
         }
         
         
