@@ -31,6 +31,7 @@ class Artiste extends CI_Controller{
         
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->load->helper('html');
         
         if ($this->form_validation->run() == FALSE)
         {
@@ -53,7 +54,16 @@ class Artiste extends CI_Controller{
     }
     
     public function recherche(){
+        
+        $date = $this->input->post('date');
+        
         $data['subView']='recherche';
+        if(empty($date)){
+            $data['empty'] = 1;
+        }else{
+            $data['empty'] = 0;
+        }
+        $data['salle'] = $this->ArtisteModel->salleDisponible($date);
         $this->load->view('template',$data);
     }   
 }

@@ -1,7 +1,9 @@
 <?php echo form_open('Artiste/Inscription'); ?>
+
     <div class="form-group">
     
     <label for="nom">Nom de l'artiste :</label>
+
     <input type="text" class="form-control" id="nom" name="nom">
     
     
@@ -18,7 +20,7 @@
     <div class="form-group">
     
     <label for="date">Année de formation :</label>
-    <input type="month" class="form-control" id="annee" name ="annee" >
+    <input type="month" class="form-control" id="annee" name ="annee" pattern="[0-9]{4}" >
     
     
     </div>
@@ -42,4 +44,5 @@
     
     <input type="submit" class="btn btn-primary btn-lg" value="Inscription"></button>
     <button type="button" class="btn btn-danger right btn-lg">Annuler</button>
-</form>
+
+<?php echo form_close(); ?>
