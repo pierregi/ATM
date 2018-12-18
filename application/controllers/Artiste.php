@@ -35,11 +35,6 @@ class Artiste extends CI_Controller{
     
     public function inscription(){
         
-<<<<<<< HEAD
-        $this->load->library('form_validation');
-        $this->load->helper('url');
-        $this->load->helper('html');
-=======
         $this->load->model('ArtisteModel');
         $this->form_validation->set_rules(
             'nom', 'Le nom',
@@ -114,7 +109,6 @@ class Artiste extends CI_Controller{
         );
         
         // Récupération des variables POST
->>>>>>> e63d5e0239985e16a21d93792f1b38ac180a4dc6
         
         
         
