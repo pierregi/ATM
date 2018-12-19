@@ -5,7 +5,12 @@
 <?php echo form_open('artiste/recherche',array('class'=>'form-inline')); ?>
 
     <div class="form-group">
+<<<<<<< HEAD
         <input type="text" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
+=======
+        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
+        <input type="text" id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
+>>>>>>> de69c8401646b0c5ef8e060eea98e5a1a39925d0
         <input type="submit" value="Rechercher" class="btn btn-primary">
     </div>
 
