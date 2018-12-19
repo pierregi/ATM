@@ -38,13 +38,14 @@ class Artiste extends CI_Controller{
         $this->load->library('form_validation');
         $this->load->helper('url');
         $this->load->helper('html');
+
         $this->load->model('ArtisteModel');
         $this->form_validation->set_rules(
             'nom', 'Le nom',
             array(
                 'required',
                 'is_unique[groupe.nom]',
-                'max_length[50]',
+                'max_length[60]',
                 array(
                     'xss_callable',
                     array($this->ArtisteModel,'xss_test')
@@ -59,14 +60,15 @@ class Artiste extends CI_Controller{
             array(
                 'required',
                 'valid_email',
-                'max_length[50]',
+                'is_unique[users.email]',
+                'max_length[120]',
                 array(
                     'xss_callable',
                     array($this->ArtisteModel,'xss_test')
                 )
             ),
             array(
-                'valid_email'       => 'Il faut rentrer un email valide .'
+                'valid_email'       => 'Il faut rentrer un email valide.'
             )
         );
         $this->form_validation->set_rules(
@@ -86,12 +88,12 @@ class Artiste extends CI_Controller{
             'password','Le password',
             array(
                 'required',
-                'matches[passConf]',
+                'matches[password2]',
                 'min_length[4]',
                 'max_length[50]'
             ),
             array(
-                'matches'       => 'Les mots de passes ne matchent pas.'
+                'matches'       => 'Les mots de passes ne correspondent pas.'
             )
         );
         $this->form_validation->set_rules(
@@ -140,16 +142,32 @@ class Artiste extends CI_Controller{
         
         $date = $this->input->post('date');
         
+        $dateTmp = explode("/",$date);
+
+        
+
         $data['subView']='recherche';
-        if(empty($date)){
-            $data['empty'] = 1;
+
+        if(!isset($date)){
+
+            $data['empty'] = -1;
+            
         }else{
-            $data['empty'] = 0;
+
+            if(empty($date)){
+            $data['empty'] = 1;
+
+            }else{
+                $data['empty'] = 0;
+                $date = $dateTmp[2]."-".$dateTmp[0]."-".$dateTmp[1];
+            }
+
         }
+        
         $data['salle'] = $this->ArtisteModel->salleDisponible($date);
         $this->load->view('template',$data);
     }   
-    
+
     public function label($id){
         $res="";
         if(null!=form_error($id)){
