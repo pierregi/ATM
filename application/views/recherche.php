@@ -5,19 +5,16 @@
 <?php echo form_open('artiste/recherche',array('class'=>'form-inline')); ?>
 
     <div class="form-group">
-<<<<<<< HEAD
-        <input type="text" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
-=======
-        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
+        <input type="text" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date" required>
+        <input type="" value="Critères suplémentaires" class="btn btn-primary" style="margin : 0 5px;" id="more">
         <input type="text" id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
->>>>>>> de69c8401646b0c5ef8e060eea98e5a1a39925d0
         <input type="submit" value="Rechercher" class="btn btn-primary">
     </div>
 
 <?php echo form_close(); ?>
 
 <hr>
-<?php if(!$empty): ?>
+<?php if(!$empty && (count($salle)>0)): ?>
 
 <small><?php echo count($salle); ?> salle(s) trouvée(s)</small>
 <table class="table table-striped">
@@ -25,7 +22,7 @@
     <tr>
       <th scope="col">Ville</th>
       <th scope="col">Salle</th>
-      <th scope="col">Accessible</th>
+      <th scope="col">Accessible &#9855;</th>
     </tr>
   </thead>
   <tbody>
@@ -72,4 +69,14 @@
       $( "#date" ).datepicker();
       $( "#date" ).datepicker("hide");
     } );
+    $('#ville').hide();
+    $('#more').on('click',(e)=>{
+        $("#more").hide();
+        $('#ville').show();
+    })
+    
+    
+    
+    
+    $('#ville').hide();
 </script>

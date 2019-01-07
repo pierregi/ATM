@@ -141,15 +141,11 @@ class Artiste extends CI_Controller{
     public function recherche(){
         
         $date = $this->input->post('date');
-<<<<<<< HEAD
         
         $dateTmp = explode("/",$date);
 
-        
 
-=======
         $ville = $this->input->post('ville');
->>>>>>> de69c8401646b0c5ef8e060eea98e5a1a39925d0
         $data['subView']='recherche';
 
         if(!isset($date)){
@@ -159,7 +155,7 @@ class Artiste extends CI_Controller{
         }else{
 
             if(empty($date)){
-            $data['empty'] = 1;
+                $data['empty'] = -1;
 
             }else{
                 $data['empty'] = 0;
@@ -167,18 +163,12 @@ class Artiste extends CI_Controller{
             }
 
         }
-<<<<<<< HEAD
         
-        $data['salle'] = $this->ArtisteModel->salleDisponible($date);
-=======
-        if(empty($ville)){
-            $data['salle'] = $this->ArtisteModel->salleDisponible($date);
-        }else{
+        if((isset($ville))&& !empty($ville)){
             $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
+        }else{
+            $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
         }
-        
-        
->>>>>>> de69c8401646b0c5ef8e060eea98e5a1a39925d0
         $this->load->view('template',$data);
     }   
 
