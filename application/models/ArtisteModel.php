@@ -53,6 +53,7 @@ class ArtisteModel extends CI_Model{
         return $this->db->get('salle')->result_array();
         
     }
+
     
     public function arr_concat($arr){
         

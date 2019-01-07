@@ -107,7 +107,7 @@ class Artiste extends CI_Controller{
         $this->form_validation->set_message(
             array(
                 'required'      =>  '%s est obligatoire',
-                'min_length'    =>  'field} doit contenir {param} caractère minimum',
+                'min_length'    =>  '{field} doit contenir {param} caractère minimum',
                 'max_length'    =>  '{field} ne peut contenir plus de {param} caractères',
                 'xss_callable' => "Balise script interdite"
             )
@@ -144,7 +144,6 @@ class Artiste extends CI_Controller{
         
         $dateTmp = explode("/",$date);
 
-
         $ville = $this->input->post('ville');
         $data['subView']='recherche';
 
@@ -169,13 +168,14 @@ class Artiste extends CI_Controller{
         }else{
             $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
         }
+
         $this->load->view('template',$data);
     }   
 
     public function label($id){
         $res="";
         if(null!=form_error($id)){
-            $res = form_error($id, 'placeholder="', '"');
+            $res = form_error($id, '<div class="alert alert-warning" role="alert">', '</div>');
         }
         return $res;
     }

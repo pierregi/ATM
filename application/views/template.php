@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url()?>static/css/main.css">
+      
+
     <!-- Javascript CDN --->
     
 
@@ -18,7 +20,7 @@
     <link rel="stylesheet" href="<?php echo base_url()?>static/css/jquery-ui.css">
 
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-
+      <script><?php echo base_url().'static/js/main.js'?>"></script> 
     <title>ATM</title>
   </head>
   <body>

@@ -5,12 +5,12 @@
 <?php echo form_open('artiste/recherche',array('class'=>'form-inline')); ?>
 
     <div class="form-group">
-        <input type="text" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date" required>
+
+        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
         <input type="" value="Critères suplémentaires" class="btn btn-primary" style="margin : 0 5px;" id="more">
         <input type="text" id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
         <input type="submit" value="Rechercher" class="btn btn-primary">
     </div>
-
 <?php echo form_close(); ?>
 
 <hr>
@@ -57,7 +57,7 @@
         'style' => 'margin-right : 8px;');
 
   
-  echo $texte." ".img($image_properties); ?></p>
+  echo $texte." ".img($image_properties); ?>
 
 <?php endif; ?>
 
@@ -65,18 +65,19 @@
 
 
 <script type="text/javascript">
+    
+    $("#ville").hide();
+    
     $( function() {
       $( "#date" ).datepicker();
       $( "#date" ).datepicker("hide");
     } );
+    
     $('#ville').hide();
+    
     $('#more').on('click',(e)=>{
         $("#more").hide();
         $('#ville').show();
     })
-    
-    
-    
-    
-    $('#ville').hide();
+
 </script>
