@@ -47,7 +47,7 @@
     $texte = "Pour rechercher une salle, utilisez l'outil de recherche en haut de la page";
     $emoji = "top";
   }else{
-    $texte = "Désolé, votre recherche n'a rien retournée";
+    $texte = "Désolé, aucune salle n'est disponible";
     $emoji = "crying_face";
   }
   $image_properties = array(
