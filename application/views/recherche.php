@@ -6,7 +6,7 @@
 
     <div class="form-group">
         <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
-        <button id="bouton">Plus de critères</button>
+        <button id="bouton"><i>add</i>Plus de critères</button>
         <input type="text" id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
         <input type="submit" value="Rechercher" class="btn btn-primary">
 
@@ -23,7 +23,7 @@
     <tr>
       <th scope="col">Ville</th>
       <th scope="col">Salle</th>
-      <th scope="col">Accessible</th>
+      <th scope="col">Accessible 	&#9855;</th>
     </tr>
   </thead>
   <tbody>

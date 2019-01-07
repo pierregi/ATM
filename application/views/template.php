@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="<?php echo base_url()?>static/css/jquery-ui.css">
 
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      <script><?php echo base_url().'static/js/main.js'?>"></script> 
+      <script src = "<?php echo base_url().'static/js/main.js'?>"></script> 
     <title>ATM</title>
   </head>
   <body>
