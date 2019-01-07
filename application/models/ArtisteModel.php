@@ -31,6 +31,13 @@ class ArtisteModel extends CI_Model{
         $this->db->insert('groupe',$data);
         
     }
+    
+    public function toutesLesVilles(){
+        $this->db->select('ville');
+        $this->db->from('salle');
+        $this->db->distinct();
+        return $this->db->get()->result_array();
+    }
 
      public function salleDisponibleVille($date,$ville = false){
         // select * from salle where salle not in (select distinct  salle from concert where date = '2017-12-09') ORDER BY ville asc

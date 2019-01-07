@@ -68,7 +68,8 @@ class Artiste extends CI_Controller{
                 )
             ),
             array(
-                'valid_email'       => 'Il faut rentrer un email valide.'
+                'valid_email'   => 'Il faut rentrer un email valide.',
+                'is_unique'     => 'Cette adresse e-mail est déjà utilisée.'
             )
         );
         $this->form_validation->set_rules(
@@ -144,7 +145,7 @@ class Artiste extends CI_Controller{
 
         $ville = $this->input->post('ville');
         $data['subView']='recherche';
-
+        $data['villes'] = $this->ArtisteModel->toutesLesVilles();
         if(!isset($date)){
 
             $data['empty'] = -1;

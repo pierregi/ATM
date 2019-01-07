@@ -6,11 +6,17 @@
 
     <div class="form-group">
 
-        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
-        <input type="" value="Critères suplémentaires" class="btn btn-primary" style="margin : 0 5px;" id="more">
-        <input type="text" id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
+        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date" required><span style="color:grey;">*&nbsp;</span>
+        <input type="" value="Critères suplémentaires" class="btn btn-primary" style="margin : 0 8px;" id="more">
+        <select id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
+            <option value="">Choisissez une ville</option>
+            <?php foreach($villes as $v): ?>
+                <option value="<?php echo $v['ville'];?>"><?php echo $v['ville'];?></option>
+            <?php endforeach; ?>
+        </select>
         <input type="submit" value="Rechercher" class="btn btn-primary">
     </div>
+    <span style="color:grey;margin-top:5px;"><small>&nbsp;&nbsp;* obligatoire</small></span>
 <?php echo form_close(); ?>
 
 <hr>
@@ -48,7 +54,7 @@
     $texte = "Pour rechercher une salle, utilisez l'outil de recherche en haut de la page";
     $emoji = "top";
   }else{
-    $texte = "Désolé, votre recherche n'a rien retournée";
+    $texte = "Désolé, aucune salle n'est disponible";
     $emoji = "crying_face";
   }
   $image_properties = array(
@@ -73,9 +79,7 @@
       $( "#date" ).datepicker();
       $( "#date" ).datepicker("hide");
     } );
-    
-    $('#ville').hide();
-    
+        
     $('#more').on('click',(e)=>{
         $("#more").hide();
         $('#ville').show();
