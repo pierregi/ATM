@@ -147,7 +147,7 @@ class Artiste extends CI_Controller{
 
         $ville = $this->input->post('ville');
         $data['subView']='recherche';
-
+        $data['villes'] = $this->ArtisteModel->toutesLesVilles();
         if(!isset($date)){
 
             $data['empty'] = -1;
