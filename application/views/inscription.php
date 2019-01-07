@@ -31,7 +31,11 @@
     <div class="form-group">
     <?php echo $password ;?>
     <label for="password">Mot de passe :</label>
+<<<<<<< HEAD
     <input type="password" class="form-control" id="password" name ="password" pattern=".{4,}" required/>
+=======
+    <input type="password" class="form-control" id="password" name ="password" pattern="{4,}" required/>
+>>>>>>> 6920c77981de2feda50c950e953c1ac0ca7957c1
     
     
     </div>
@@ -40,7 +44,11 @@
     <div class="form-group">
     <?php echo $password2 ;?>
     <label for="password2">Confirmer le mot de passe :</label>
+<<<<<<< HEAD
     <input type="password" class="form-control" id="password2" name ="password2" pattern=".{4,}" required/>
+=======
+    <input type="password" class="form-control" id="password2" name ="password2" pattern="{4,}" required/>
+>>>>>>> 6920c77981de2feda50c950e953c1ac0ca7957c1
     
     </div>
     <div class="" id="passwordStrength"></div>

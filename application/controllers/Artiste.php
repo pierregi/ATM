@@ -143,6 +143,7 @@ class Artiste extends CI_Controller{
         $date = $this->input->post('date');
         
         $dateTmp = explode("/",$date);
+
         $ville = $this->input->post('ville');
         $data['subView']='recherche';
 
@@ -153,7 +154,7 @@ class Artiste extends CI_Controller{
         }else{
 
             if(empty($date)){
-            $data['empty'] = 1;
+                $data['empty'] = -1;
 
             }else{
                 $data['empty'] = 0;
@@ -161,11 +162,11 @@ class Artiste extends CI_Controller{
             }
 
         }
-
-        if(empty($ville)){
-            $data['salle'] = $this->ArtisteModel->salleDisponible($date);
-        }else{
+        
+        if((isset($ville))&& !empty($ville)){
             $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
+        }else{
+            $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
         }
 
         $this->load->view('template',$data);

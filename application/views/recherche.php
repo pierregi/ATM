@@ -5,17 +5,20 @@
 <?php echo form_open('artiste/recherche',array('class'=>'form-inline')); ?>
 
     <div class="form-group">
+
         <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date">
+<<<<<<< HEAD
         <button id="bouton"><i>add</i>Plus de critères</button>
+=======
+        <input type="" value="Critères suplémentaires" class="btn btn-primary" style="margin : 0 5px;" id="more">
+>>>>>>> 6920c77981de2feda50c950e953c1ac0ca7957c1
         <input type="text" id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
         <input type="submit" value="Rechercher" class="btn btn-primary">
-
-
+    </div>
 <?php echo form_close(); ?>
 
 <hr>
-<br>
-<?php if(!$empty): ?>
+<?php if(!$empty && (count($salle)>0)): ?>
 
 <small><?php echo count($salle); ?> salle(s) trouvée(s)</small>
 <table class="table table-striped">
@@ -23,7 +26,11 @@
     <tr>
       <th scope="col">Ville</th>
       <th scope="col">Salle</th>
+<<<<<<< HEAD
       <th scope="col">Accessible 	&#9855;</th>
+=======
+      <th scope="col">Accessible &#9855;</th>
+>>>>>>> 6920c77981de2feda50c950e953c1ac0ca7957c1
     </tr>
   </thead>
   <tbody>
@@ -58,7 +65,7 @@
         'style' => 'margin-right : 8px;');
 
   
-  echo $texte." ".img($image_properties); ?></p>
+  echo $texte." ".img($image_properties); ?>
 
 <?php endif; ?>
 
@@ -66,6 +73,7 @@
 
 
 <script type="text/javascript">
+    
     $("#ville").hide();
     
     $( function() {
@@ -73,16 +81,11 @@
       $( "#date" ).datepicker("hide");
     } );
     
-
-    $("#bouton").click(function(e){
-      e.preventDefault();
-        if($("#ville").is(":hidden")){
-            $("#ville").show();
-            $('#bouton').html('Moin de critères');
-        }else{
-            $("#ville").hide();
-            $('#bouton').html('Plus de critères');
-        }
-    });
+    $('#ville').hide();
+    
+    $('#more').on('click',(e)=>{
+        $("#more").hide();
+        $('#ville').show();
+    })
 
 </script>
