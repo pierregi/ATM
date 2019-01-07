@@ -35,6 +35,10 @@ class Artiste extends CI_Controller{
     
     public function inscription(){
         
+        $this->load->library('form_validation');
+        $this->load->helper('url');
+        $this->load->helper('html');
+
         $this->load->model('ArtisteModel');
         $this->form_validation->set_rules(
             'nom', 'Le nom',
@@ -103,7 +107,7 @@ class Artiste extends CI_Controller{
         $this->form_validation->set_message(
             array(
                 'required'      =>  '%s est obligatoire',
-                'min_length'    =>  'field} doit contenir {param} caractère minimum',
+                'min_length'    =>  '{field} doit contenir {param} caractère minimum',
                 'max_length'    =>  '{field} ne peut contenir plus de {param} caractères',
                 'xss_callable' => "Balise script interdite"
             )
@@ -111,9 +115,6 @@ class Artiste extends CI_Controller{
         
         // Récupération des variables POST
         
-        
-        
-
         if ($this->form_validation->run() === FALSE)
         {
             $data['nom'] = $this->label('nom');
@@ -140,27 +141,40 @@ class Artiste extends CI_Controller{
     public function recherche(){
         
         $date = $this->input->post('date');
+        
+        $dateTmp = explode("/",$date);
         $ville = $this->input->post('ville');
         $data['subView']='recherche';
-        if(empty($date)){
-            $data['empty'] = 1;
+
+        if(!isset($date)){
+
+            $data['empty'] = -1;
+            
         }else{
-            $data['empty'] = 0;
+
+            if(empty($date)){
+            $data['empty'] = 1;
+
+            }else{
+                $data['empty'] = 0;
+                $date = $dateTmp[2]."-".$dateTmp[0]."-".$dateTmp[1];
+            }
+
         }
+
         if(empty($ville)){
             $data['salle'] = $this->ArtisteModel->salleDisponible($date);
         }else{
             $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
         }
-        
-        
+
         $this->load->view('template',$data);
     }   
-    
+
     public function label($id){
         $res="";
         if(null!=form_error($id)){
-            $res = form_error($id, 'placeholder="', '"');
+            $res = form_error($id, '<div class="alert alert-warning" role="alert">', '</div>');
         }
         return $res;
     }

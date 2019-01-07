@@ -84,6 +84,7 @@ class ArtisteModel extends CI_Model{
     }
     
 
+
      public function xss_test($string){
         return $this->security->xss_clean($string, TRUE)!==FALSE;
     }
