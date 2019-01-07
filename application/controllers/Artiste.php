@@ -88,21 +88,19 @@ class Artiste extends CI_Controller{
             'password','Le password',
             array(
                 'required',
-                'matches[password2]',
                 'min_length[4]',
                 'max_length[50]'
-            ),
-            array(
-                'matches'       => 'Les mots de passes ne correspondent pas.'
             )
         );
         $this->form_validation->set_rules(
             'password2','La confirmation du password',
             array(
                 'required',
-                'min_length[4]',
-                'max_length[50]'
-                )                
+                'matches[password]',
+                ),
+            array(
+                'matches'       => 'Les mots de passes ne correspondent pas.'
+            )
         );
         $this->form_validation->set_message(
             array(
