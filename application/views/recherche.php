@@ -5,6 +5,7 @@
 <?php echo form_open('artiste/recherche',array('class'=>'form-inline')); ?>
 
     <div class="form-group">
+
         <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date" required><span style="color:grey;">*&nbsp;</span>
         <input type="" value="Critères suplémentaires" class="btn btn-primary" style="margin : 0 8px;" id="more">
         <select id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
@@ -27,6 +28,7 @@
     <tr>
       <th scope="col">Ville</th>
       <th scope="col">Salle</th>
+
       <th scope="col">Accessible &#9855;</th>
     </tr>
   </thead>
@@ -77,9 +79,7 @@
       $( "#date" ).datepicker();
       $( "#date" ).datepicker("hide");
     } );
-    
-    $('#ville').hide();
-    
+        
     $('#more').on('click',(e)=>{
         $("#more").hide();
         $('#ville').show();

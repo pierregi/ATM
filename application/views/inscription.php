@@ -42,7 +42,6 @@
     <input type="password" class="form-control" id="password2" name ="password2" pattern=".{4,}" required/>
     
     </div>
-    <div class="" id="passwordStrength"></div>
 
     <input type="submit" class="btn btn-primary btn-lg" value="Inscription">
     <button type="button" class="btn btn-danger right btn-lg">Annuler</button>
