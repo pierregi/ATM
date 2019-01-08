@@ -68,7 +68,17 @@ class ArtisteModel extends CI_Model{
         return $this->db->get('salle')->result_array();
         
     }
-
+    
+    public function getConcerts ($nomArtiste = 'The Midnight Revolution') {
+        $this->db->select('est_accessible,groupe,date,concert.salle,projet,ville');
+        $this->db->from('concert');
+        $this->db->join('salle','concert.salle = salle.salle');
+        $this->db->join('concert_projet','concert.id = concert_projet.concert','left');
+        
+        $this->db->where('groupe',$nomArtiste);
+        return $this->db->get()->result_array();
+    }
+    
     
     public function arr_concat($arr){
         

@@ -178,7 +178,11 @@ class Artiste extends CI_Controller{
         $this->load->view('template',$data);
     }
     
-    
+    public function mes_concerts () {
+        $data['subView'] = 'mes_concerts';
+        $data['concerts'] = $this->ArtisteModel->getConcerts();
+        $this->load->view('template',$data);
+    }
 
     public function label($id){
         $res="";
