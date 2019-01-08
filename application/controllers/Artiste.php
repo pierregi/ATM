@@ -172,6 +172,15 @@ class Artiste extends CI_Controller{
 
         $this->load->view('template',$data);
     }   
+    
+    
+    public function confirmation () {
+        $data['users'] = $this->ArtisteModel->getUserUnconfirmed();
+        $data['subView']= 'confirmation';
+        $this->load->view('template',$data);
+    }
+    
+    
 
     public function label($id){
         $res="";

@@ -38,6 +38,14 @@ class ArtisteModel extends CI_Model{
         $this->db->distinct();
         return $this->db->get()->result_array();
     }
+    
+    public function getUserUnconfirmed () {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->join('groupe','users.id = groupe.id');
+        $this->db->where("valide","false");
+        return $this->db->get()->result_array();
+    }
 
      public function salleDisponibleVille($date,$ville = false){
         // select * from salle where salle not in (select distinct  salle from concert where date = '2017-12-09') ORDER BY ville asc
