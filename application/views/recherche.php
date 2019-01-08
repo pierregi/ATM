@@ -6,7 +6,7 @@
 
     <div class="form-group">
 
-        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date" required><span style="color:grey;">*&nbsp;</span>
+        <input type="date" id="date" class="form-control" placeholder="Date" style="margin : 0 5px;" name="date" value="<?php echo( set_value('date',"",TRUE));?>"required><span style="color:grey;">*&nbsp;</span>
         <input type="" value="Critères suplémentaires" class="btn btn-primary" style="margin : 0 8px;" id="more">
         <select id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
             <option value="">Choisissez une ville</option>
@@ -36,7 +36,7 @@
       
   
   <?php foreach($salle as $date): ?>
-        <tr>
+        <tr onclick="document.location.href='<?php echo base_url();?>'">
             <th><?php echo $date["ville"]?></th>
             <th><?php echo $date["salle"]?></th>
             <th><?php if($date['accessible'] == "f"){echo "Non"; }else{echo "Oui";}?></th>
