@@ -1,3 +1,5 @@
+<h1>Inscription</h1>
+<hr>
 <?php echo form_open('Artiste/Inscription'); ?>
 
     <div class="form-group">
