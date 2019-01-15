@@ -238,7 +238,20 @@ class Artiste extends CI_Controller{
         $data['subView']='recherche';
         $data['modal']=false;
         $this->load->view('template',$data);
-       
+
+    }   
+    
+    
+    public function confirmation () {
+        $data['users'] = $this->ArtisteModel->getUserUnconfirmed();
+        $data['subView']= 'confirmation';
+        $this->load->view('template',$data);
+    }
+    
+    public function mes_concerts () {
+        $data['subView'] = 'mes_concerts';
+        $data['concerts'] = $this->ArtisteModel->getConcerts();
+        $this->load->view('template',$data);
     }
 
     public function label($id){

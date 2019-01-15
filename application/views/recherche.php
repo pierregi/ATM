@@ -11,15 +11,15 @@
         <div type=""  class="btn btn-primary" style="margin : 0 8px;" id="more">Critères suplémentaires</div>
         <select id="ville" class="form-control" placeholder="Ville" style="margin : 0 5px;" name="ville">
             <option value="">Choisissez une ville</option>
+            <option value="fake">Fausse ville</option>
             <?php foreach($villes as $v): ?>
                 <option value="<?php echo $v['ville'];?>"><?php echo $v['ville'];?></option>
             <?php endforeach; ?>
         </select>
         <input type="submit" value="Rechercher" class="btn btn-primary">
     </div>
-    <span style="color:grey;margin-top:5px;"><small>&nbsp;&nbsp;* obligatoire</small></span>
 <?php echo form_close(); ?>
-
+<span style="color:grey;margin-top:5px;"><small>&nbsp;&nbsp;* obligatoire</small></span>
 <hr>
 <?php if(!$empty && (count($salle)>0)): ?>
 

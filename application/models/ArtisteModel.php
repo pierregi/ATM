@@ -38,6 +38,14 @@ class ArtisteModel extends CI_Model{
         $this->db->distinct();
         return $this->db->get()->result_array();
     }
+    
+    public function getUserUnconfirmed () {
+        $this->db->select('*');
+        $this->db->from('users');
+        $this->db->join('groupe','users.id = groupe.id');
+        $this->db->where("valide","false");
+        return $this->db->get()->result_array();
+    }
 
      public function salleDisponibleVille($date,$ville = false){
         // select * from salle where salle not in (select distinct  salle from concert where date = '2017-12-09') ORDER BY ville asc
@@ -60,7 +68,17 @@ class ArtisteModel extends CI_Model{
         return $this->db->get('salle')->result_array();
         
     }
-
+    
+    public function getConcerts ($nomArtiste = 'The Midnight Revolution') {
+        $this->db->select('est_accessible,groupe,date,concert.salle,projet,ville');
+        $this->db->from('concert');
+        $this->db->join('salle','concert.salle = salle.salle');
+        $this->db->join('concert_projet','concert.id = concert_projet.concert','left');
+        
+        $this->db->where('groupe',$nomArtiste);
+        return $this->db->get()->result_array();
+    }
+    
     
     public function arr_concat($arr){
         
