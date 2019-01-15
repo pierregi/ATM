@@ -138,43 +138,113 @@ class Artiste extends CI_Controller{
     }
     
     public function recherche(){
-        
-        $date = $this->input->post('date');
-        
-        $dateTmp = explode("/",$date);
-
-        $ville = $this->input->post('ville');
-        $data['subView']='recherche';
-        $data['villes'] = $this->ArtisteModel->toutesLesVilles();
-        if(!isset($date)){
-
-            $data['empty'] = -1;
-            
+       $this->form_validation->set_rules(
+            'date','La date',
+            array(
+                'required',
+                'regex_match[#[0-9]{2}/[0-9]{2}/[0-9]{4}#]'                
+            ),
+            array(
+                'required'      =>  '%s est obligatoire',
+                'regex_match'   =>  '%s doit etre de la forme MM/JJ/AAAA' 
+            )
+        );
+        $data['errorDate'] ="";
+        $data['empty']=-1;  
+        if ($this->form_validation->run() === FALSE)
+        {
+            $data['errorDate'] = $this->label('date');
         }else{
+            $date = $this->input->post('date');
+            $data['date']=str_replace('/','_',$date);
+            $dateTmp = explode("/",$date);
+            if(!isset($date)){
 
-            if(empty($date)){
                 $data['empty'] = -1;
 
             }else{
-                $data['empty'] = 0;
-                $date = $dateTmp[2]."-".$dateTmp[0]."-".$dateTmp[1];
+
+                if(empty($date)){
+                    $data['empty'] = -1;
+
+                }else{
+                    $data['empty'] = 0;
+                    $date = $dateTmp[2]."-".$dateTmp[0]."-".$dateTmp[1];
+                }
             }
+            $ville = $this->input->post('ville');
+            $data['villes'] = $this->ArtisteModel->toutesLesVilles();
+
+            if((isset($ville))&& !empty($ville)){
+                $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
+            }else{
+                $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
+            }
+            $data['projet']= $this->ArtisteModel->toutLesProjet();
 
         }
-        
-        if((isset($ville))&& !empty($ville)){
-            $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
-        }else{
-            $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
-        }
-
+        $data['subView']='recherche';
+        $data['modal']=false;
         $this->load->view('template',$data);
     }   
+    
+    public function reserver(){
+        $this->form_validation->set_rules(
+            'date','La date',
+            array(
+                'required',
+                'regex_match[#^[0-9]{2}/[0-9]{2}/[0-9]{4}$# ]'                
+            ),
+            array(
+                'required'      =>  '%s est obligatoire',
+                'regex_match'   =>  '%s doit etre de la forme MM/JJ/AAAA' 
+            )
+        );
+        $data['errorDate'] ="";
+        $data['errorDate2'] ="";
+        $data['empty']=-1;  
+        if ($this->form_validation->run() === FALSE)
+        {
+            $data['errorDate2'] = $this->label('date');
+        }else{
+            $date = $this->input->post('date');
+            $data['date']=str_replace('/','_',$date);
+            $dateTmp = explode("/",$date);
+            if(!isset($date)){
+
+                $data['empty'] = -1;
+
+            }else{
+
+                if(empty($date)){
+                    $data['empty'] = -1;
+
+                }else{
+                    $data['empty'] = 0;
+                    $date = $dateTmp[2]."-".$dateTmp[0]."-".$dateTmp[1];
+                }
+            }
+            $ville = $this->input->post('ville');
+            $data['villes'] = $this->ArtisteModel->toutesLesVilles();
+
+            if((isset($ville))&& !empty($ville)){
+                $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
+            }else{
+                $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
+            }
+            $data['projet']= $this->ArtisteModel->toutLesProjet();
+
+        }
+        $data['subView']='recherche';
+        $data['modal']=false;
+        $this->load->view('template',$data);
+       
+    }
 
     public function label($id){
         $res="";
         if(null!=form_error($id)){
-            $res = form_error($id, '<div class="alert alert-warning" role="alert">', '</div>');
+            $res = form_error($id, '<div class="alert alert-warning" role="alert">', '</div><br/>');
         }
         return $res;
     }

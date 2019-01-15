@@ -71,7 +71,11 @@ class ArtisteModel extends CI_Model{
         return $tmp;
     }
     
-
+    public function toutLesProjet(){
+        $this->db->select('nom');
+        $this->db->from('projet');
+        return $this->db->get()->result_array();
+    }
 
      public function xss_test($string){
         return $this->security->xss_clean($string, TRUE)!==FALSE;

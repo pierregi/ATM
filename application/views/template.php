@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="<?php echo base_url()?>static/css/jquery-ui.css">
 
     <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-      <script src = "<?php echo base_url().'static/js/main.js'?>"></script> 
     <title>ATM</title>
   </head>
   <body>
@@ -30,6 +29,23 @@
       <?php $this->load->view($subView); ?>
       
       </div>
-  
-  </body>
+  <script type="text/javascript">
+    
+    $("#ville").hide();
+    
+    $( function() {
+      $( "#date" ).datepicker({
+          minDate : "12/07/2017",
+          maxDate : "12/25/2017"
+      });
+      $( "#date" ).datepicker("hide");
+    } );
+        
+    $('#more').on('click',(e)=>{
+        $("#more").hide();
+        $('#ville').show();
+    })
+
+</script>
+    </body>
 </html>
