@@ -39,6 +39,18 @@ class ArtisteModel extends CI_Model{
         return $this->db->get()->result_array();
     }
     
+    public function datePossible($artiste,$date) {
+        $this->db->select('*');
+        $this->db->from('concert');
+        $this->db->where("groupe",$artiste);
+        $this->db->where("date",$this->format_date($date));
+        $res = $this->db->get()->result_array();
+        if (count($res) >0 ) {
+            return false;
+        }
+        return true;
+    }
+    
     public function getUserUnconfirmed () {
         $this->db->select('*');
         $this->db->from('users');
@@ -79,6 +91,11 @@ class ArtisteModel extends CI_Model{
         return $this->db->get()->result_array();
     }
     
+    public function format_date($date){
+        $tmp = explode('/',$date);
+        $tmp = $tmp[2]."-".$tmp[0]."-".$tmp[1];
+        return $tmp;
+    }
     
     public function arr_concat($arr){
         

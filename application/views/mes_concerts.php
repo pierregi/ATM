@@ -3,6 +3,20 @@
     .dataTables_filter {
         float: left !important;
     }
+    
+    table.dataTable thead th {
+          border-bottom: 0;
+    }
+    table.dataTable tfoot th {
+          border-top: 0;
+    }
+    #concerts{
+        margin-top: 4em;
+    }
+    
+    table.dataTable.no-footer {
+  border-bottom: 0;
+}
 
 </style>
 <h1>Mes concerts</h1>

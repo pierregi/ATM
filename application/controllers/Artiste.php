@@ -156,31 +156,39 @@ class Artiste extends CI_Controller{
             $data['errorDate'] = $this->label('date');
         }else{
             $date = $this->input->post('date');
-            $data['date']=str_replace('/','_',$date);
-            $dateTmp = explode("/",$date);
-            if(!isset($date)){
+            $possible = $this->ArtisteModel->datePossible('The Midnight Revolution',$date);
+            if ($possible) {
+                $data['date']=str_replace('/','_',$date);
+                $dateTmp = explode("/",$date);
+                if(!isset($date)){
 
-                $data['empty'] = -1;
-
-            }else{
-
-                if(empty($date)){
                     $data['empty'] = -1;
 
                 }else{
-                    $data['empty'] = 0;
-                    $date = $dateTmp[2]."-".$dateTmp[0]."-".$dateTmp[1];
-                }
-            }
-            $ville = $this->input->post('ville');
-            $data['villes'] = $this->ArtisteModel->toutesLesVilles();
 
-            if((isset($ville))&& !empty($ville)){
-                $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
-            }else{
-                $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
+                    if(empty($date)){
+                        $data['empty'] = -1;
+
+                    }else{
+                        $data['empty'] = 0;
+                        $date = $dateTmp[2]."-".$dateTmp[0]."-".$dateTmp[1];
+                    }
+                }
+                $ville = $this->input->post('ville');
+                $data['villes'] = $this->ArtisteModel->toutesLesVilles();
+
+                if((isset($ville))&& !empty($ville)){
+                    $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date,$ville);
+                }else{
+                    $data['salle'] = $this->ArtisteModel->salleDisponibleVille($date);
+                }
+                $data['projet']= $this->ArtisteModel->toutLesProjet();
+                
+             } else {
+                $data['empty'] = 2; 
             }
-            $data['projet']= $this->ArtisteModel->toutLesProjet();
+            
+            
 
         }
         $data['subView']='recherche';
